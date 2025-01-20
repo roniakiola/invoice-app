@@ -1,0 +1,12 @@
+services:
+  backend:
+    build:
+      target: prod
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - '3001:3001'
+    environment:
+      - NODE_ENV=production
+    env_file:
+      - .env
