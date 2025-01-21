@@ -69,7 +69,7 @@ export class InvoiceService {
 
       generatedXMLs.push(generatedXML);
 
-      const fileName = `Roni_Akiola_${invoice.CustomerName}_invoice_test.xml`;
+      const fileName = `Roni_Akiola_${invoice.CustomerName}_invoice.xml`;
       const blobClient = blobContainer.getBlobClient(fileName);
       const blockBlobClient = blobClient.getBlockBlobClient();
 

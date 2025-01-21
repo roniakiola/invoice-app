@@ -1,100 +1,106 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Invoice Generation Project
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Project Overview
+The goal of this project was to implement an integration for generating invoice files in both XML and PDF formats for customers, using data stored in a relational database. The generated invoice files were uploaded to an Azure Blob Storage container.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### Key Requirements:
+- **Data Source:**
+  - `customers`
+  - `products`
+  - `orders`
+  - `orderLines`
 
-## Description
+- **Output Files:**
+  - **XML Files** 
+  - **PDF Files** 
+  - All files (except some test files, oops :D) are named in the format `Roni_Akiola_[CustomerName]_invoice.xml`.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Azure Blob Storage:** The generated files were to be uploaded to a Blob Storage container named by my name.
 
-## Project setup
+## Tasks:
+#### 1. **Data Mapping and Retrieval:** :heavy_check_mark:
+   - Successfully retrieved data from the database using NestJS with TypeORM.
+   - Mapped the data from the database into the required structure.
 
+#### 2. **XML File Generation:** :heavy_check_mark:
+   - Used the `fast-xml-parser` library to build XML files.
+   - For each customer, an XML invoice file was generated containing their details (name, address, email, due date, order's product information, and total amount).
+   - The XML files were formatted and uploaded to the Azure Blob Storage container.
+
+#### 3. **PDF File Generation:** :heavy_exclamation_mark:
+   - PDF file generation was tried briefly but time limit was already exceeded so efforts to make it work were discontinued (for not...).
+
+#### 4. **File Upload to Azure Blob Storage:** :heavy_check_mark:
+   - The generated XML files were uploaded to the Azure Blob Storage container using the `@azure/storage-blob` SDK.
+   - The file names followed the specified format and were stored successfully in the container.
+   - :heavy_exclamation_mark: This still needs practise since it's completely new tech for me. Not understanding much yet. :heavy_exclamation_mark:
+
+#### 5. **Testing and Integration:** :heavy_check_mark:
+   - Brute testing inside ethe application was done to check if the files were added into the Blob Storage.
+   - There is no complete certainty if the test is working correctly
+   - Needs actual tests :heavy_exclamation_mark:
+   - Documentation was made of process
+
+## What Was Learned:
+1. **XML and PDF Generation:**
+   - Learned how to generate XML files programmatically using `fast-xml-parser`, which simplified the process of converting the data into a structured format.
+   - Explored various libraries for PDF generation so it's easier to begin now 
+
+2. **Azure Blob Storage Integration:**
+   - Gained hands-on experience with the `@azure/storage-blob` SDK for uploading and retrieving files from Azure Blob Storage.
+
+3. **TypeORM for Database Queries:**
+   - Using TypeORM to fetch relational data and map it to the invoice structure allowed us to efficiently query the database and handle related entities (e.g., customers, orders, products).
+
+4. **Challenges with Formatting:**
+   - The formatting of the XML files, especially with large datasets, required careful attention to ensure readability and correctness.
+
+## Questions/Next Steps:
+
+1. **Generating PDFs:**
+   - What does this take to program well and effortlessly? How to do the layouts? How to structure the data on the file?
+
+2. **Error Handling:**
+   - What additional logging and error handling mechanisms should be implement for better debugging and tracking in production environments?
+
+3. **Automated File Generation:**
+   - Is it possible to automate the invoice generation and upload process to run monthly (as per the invoicing schedule), or should it be triggered manually?
+
+## How to run
+
+- :exclamation: Note: This program wont work after a while! :exclamation:
+
+### 1. Clone the Repository
 ```bash
-$ npm install
+git clone https://github.com/roniakiola/invoice-app.git
+cd invoice-app
 ```
 
-## Compile and run the project
-
+### 2. Docker Compose
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+docker-compose -f docker-compose.dev.yml up --build
 ```
 
-## Run tests
-
+### 3. Test with Postman or any other program to test API-endpoints
+Generate XML-files:
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+GET http://localhost:3001/invoice/generate
 ```
+It will generate the XML-files and give you all the XML files in HTTP-response (It's a big messily structured right now but it has all the data).
 
-## Deployment
+![alt text](img/xml_in_http_response.png)
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+Check if files exist:
 ```bash
-$ npm install -g mau
-$ mau deploy
+GET http://localhost:3001/invoice/file/Roni_Akiola_Innovative Widgets Co.invoice.xml
+
+GET http://localhost:3001/invoice/file/Roni_Akiola_Green Energy Corp.invoice.xml
+
+GET http://localhost:3001/invoice/file/Roni_Akiola_Tech Solutions Inc.invoice.xml
 ```
+![alt text](img/true.png)
+![alt text](img/false.png)
+## Conclusion:
+This project provided valuable insights into integrating multiple technologies (database, XML, PDF, and cloud storage) to fulfill business requirements. The majority of the core functionality has been implemented successfully, but there are a few tasks such as PDF layout customization and testing that require further attention. These tasks, along with any additional features, can be addressed in the next phase of the project. But for a small spurt, it was was a great lessons.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-# invoice-app
+Sorry about sending this late :sob:
