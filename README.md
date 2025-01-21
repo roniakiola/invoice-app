@@ -68,7 +68,7 @@ The goal of this project was to implement an integration for generating invoice 
 
 ## How to run
 
-- :exclamation: Note: This program wont work after a while! :exclamation:
+- :exclamation: Note: This program wont work after a while since the DB will be taken down! :exclamation:
 
 ### 1. Clone the Repository
 ```bash
