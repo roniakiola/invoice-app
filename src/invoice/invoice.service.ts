@@ -61,7 +61,7 @@ export class InvoiceService {
     const generatedXMLs: string[] = [];
 
     const blobContainer =
-      this.blobServiceClient.getContainerClient('newfellows2025');
+      this.blobServiceClient.getContainerClient('Roni_Akiola');
 
     for (const invoice of data) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -69,7 +69,7 @@ export class InvoiceService {
 
       generatedXMLs.push(generatedXML);
 
-      const fileName = `Roni_Akiola_${invoice.CustomerName}_invoice.xml`;
+      const fileName = `Roni_Akiola_${invoice.CustomerName}_Invoice.xml`;
       const blobClient = blobContainer.getBlobClient(fileName);
       const blockBlobClient = blobClient.getBlockBlobClient();
 
@@ -81,7 +81,7 @@ export class InvoiceService {
 
   async checkIfFileExists(fileName: string): Promise<boolean> {
     const containerClient =
-      this.blobServiceClient.getContainerClient('newfellows2025');
+      this.blobServiceClient.getContainerClient('Roni_Akiola');
     const blobClient = containerClient.getBlobClient(fileName);
 
     try {
