@@ -102,5 +102,3 @@ GET http://localhost:3001/invoice/file/Roni_Akiola_Tech Solutions Inc.invoice.xm
 ![alt text](img/false.png)
 ## Conclusion:
 This project provided valuable insights into integrating multiple technologies (database, XML, PDF, and cloud storage) to fulfill business requirements. The majority of the core functionality has been implemented successfully, but there are a few tasks such as PDF layout customization and testing that require further attention. These tasks, along with any additional features, can be addressed in the next phase of the project. But for a small spurt, it was was a great lessons.
-
-Sorry about sending this late :sob:
